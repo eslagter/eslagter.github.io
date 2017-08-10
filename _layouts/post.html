@@ -6,10 +6,32 @@ layout: default
     <a href="{{ site.baseurl }}/">{{ site.name }}</a>
   </h1>
 </header>
-<div class="content post">
+<article class="content post">
   <h1 class="post-title">{{ page.title }}</h1>
   <div class="post-date">
     <time>{{ page.date | date_to_string }}</time>
   </div>
+
   {{ content }}
-</div>
+
+  {% if page.links.size > 0 %}
+    <section class="post-links">
+      <h2>Related links</h2>
+      <ul>
+        {% for link in page.links %}
+          <li><a href="{{link}}">{{link}}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  <nav class="post-navigation">
+    {% if page.previous.url %}
+      <a rel="previous" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+    {% endif %}
+    {% if page.next.url %}
+      <a rel="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+    {% endif %}
+  </nav>
+
+</article>
